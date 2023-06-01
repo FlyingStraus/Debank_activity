@@ -77,4 +77,13 @@ class Debank():
         # if data["data"]["is_success"]!= True:
         #     raise FollowProblems(r,self.public_address)
 
+    def vote(self,vote_id):
+
+        data = {"id":vote_id}
+
+        r = session.post(f"https://api.debank.com/proposal/vote", json = data,headers = self.headers)
+        if int(r.status_code) != 200:
+            raise WrongResponce(r)
+
+        # data = json.loads(json.dumps(eval((r.text).replace("null", "None").replace("false", "False").replace("true", "True"))))
 

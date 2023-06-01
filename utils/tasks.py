@@ -27,6 +27,21 @@ class Tasks():
 
         logging.info(f"Done with wallet - {self.public_key} ")
 
-    
+    def vote(self, vote_id):
+        driver = Debank(private_key = self.private_key, proxy=self.proxy)
+        logging.info(f"Working with wallet - {self.public_key} ")
+
+        try:
+            driver.login()
+            try:
+                driver.vote(vote_id)
+            except Exception as e:
+                logging.critical(f"Could not vote on wallet-  {self.public_key} - {e}")
+
+        except Exception as e:
+            logging.critical(f'Could not login to waller - {self.public_key} - {e}')
+
+        logging.info(f"Done with wallet - {self.public_key} ")
+
     
     

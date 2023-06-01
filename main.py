@@ -56,7 +56,7 @@ if __name__ == '__main__':
     task_todo = int(input("Your choise: "))
 
     if task_todo == 1:
-        task_option = int(input("Choose:\n1)Manually entered addresses\n2)Random 5 wallets\nYour choise: "))
+        task_option = int(input("Choose:\n1)Manually entered addresses\n2)Random number wallets\nYour choise: "))
         if task_option == 1:
             with open('follow_to.txt') as f:
                 follow_to = f.readlines()
@@ -103,6 +103,29 @@ if __name__ == '__main__':
                     logging.error(f"Error - {er}")
                 logging.info(f"Sleeping")
                 sleep(10)
+    
+    elif task_todo == 2:
+        vote_id = int(input("Enter proposal ID (number): "))
+        if proxies is not None:
+            for i in range(len(wallets)):
+                try:
+                    lol = Tasks(wallets[i],proxy=proxies[i])
+                    lol.vote(vote_id)
+                    
+                except Exception as er:
+                    logging.error(f"Error - {er}")
+                logging.info(f"Sleeping")
+                sleep(10)
+        else:
+            for i in range(len(wallets)):
+                try:
+                    lol = Tasks(wallets[i])
+                    lol.vote(vote_id)           
+                except Exception as er:
+                    logging.error(f"Error - {er}")
+                logging.info(f"Sleeping")
+                sleep(10)
+
 
     input("Done, Press any button to close")
 
